@@ -22,7 +22,7 @@ def getTherapistProfileLinks(zipcode):
     teletherapyLinks = []
 
     for teletherapist in teletherapists:
-        print(teletherapist['href'])
+        #print(teletherapist['href'])
         teletherapyLinks.append(teletherapist['href'])
 
     return teletherapyLinks
