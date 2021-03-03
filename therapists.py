@@ -34,7 +34,7 @@ def getTherapistProfileLinks(zipcode):
 
     tup = (teletherapyLinks, nextPageLink);
 
-    print(tup)
+    #print(tup)
 
     return tup
 
@@ -71,7 +71,7 @@ def getNextTherapistProfileLinks(link):
 
     tup = (teletherapyLinks, nextPageLink);
 
-    print(tup)
+    #print(tup)
 
     return tup
 

@@ -13,7 +13,7 @@ import zipcode
 def readProfileData(sheet, therapistProfileLinks, count):
 
     for therapistProfileLink in therapistProfileLinks:
-        print(therapistProfileLink)
+        #print(therapistProfileLink)
         header = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
         }
@@ -46,8 +46,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"A{count}"] = fullName.text.strip()
         except:
-            print("Something else went wrong")
-
+            #print("Something else went wrong")
+            pass
 
 
         try:
@@ -56,8 +56,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
             # print(f'Phone: {phone.text.strip()}')
             sheet[f"G{count}"] = phone.text.strip()
         except:
-            print("Something else went wrong phone")
-
+            #print("Something else went wrong phone")
+            pass
 
         profileTitles = heading.find(attrs={"class": "profile-title"})
 
@@ -80,8 +80,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"B{count}"] = certifications
         except:
-            print("Something else went wrong certifications")
-
+            #print("Something else went wrong certifications")
+            pass
         ########### profile content #############
 
         profileContent = soup.find(attrs={"id":"profile-content"})
@@ -106,8 +106,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
         try:
             sheet[f"S{count}"] = personalStatementsStr
         except:
-            print("Something else went wrong personalStatementsStr")
-
+            #print("Something else went wrong personalStatementsStr")
+            pass
         #print(f'detailsColumn: {detailsColumn.prettify()}')
 
         specialtiesColumn = profileContent.find(attrs={"class":"col-xs-12 col-sm-12 col-md-5 col-lg-5 specialties-column"})
@@ -121,8 +121,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"C{count}"] = streetAddress
         except:
-            print("Something else went wrong url"+therapistProfileLink)
-
+            #print("Something else went wrong url"+therapistProfileLink)
+            pass
 
 
 
@@ -135,8 +135,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"D{count}"] = addressLocality
         except:
-            print("Something else went wrong url addressLocality "+therapistProfileLink)
-
+            #print("Something else went wrong url addressLocality "+therapistProfileLink)
+            pass
 
 
 
@@ -147,8 +147,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             # print(f'addressRegion: {addressRegion}')
         except:
-            print("Something else went wrong url addressRegion "+therapistProfileLink)
-
+           #print("Something else went wrong url addressRegion "+therapistProfileLink)
+           pass
 
         try:
             postalcode = specialtiesColumn.find(attrs={"itemprop": "postalcode"}).text.strip()
@@ -157,8 +157,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             # print(f'postalcode: {postalcode}')
         except:
-            print("Something else went wrong url postalcode "+therapistProfileLink)
-
+            #print("Something else went wrong url postalcode "+therapistProfileLink)
+            pass
         additionalAddress = None
 
         try:
@@ -166,8 +166,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             # print(f'additionalAddress: {additionalAddress.prettify()}')
         except:
-            print("Something else went wrong url additionalAddress " + therapistProfileLink)
-
+            #print("Something else went wrong url additionalAddress " + therapistProfileLink)
+            pass
         if additionalAddress!=None:
             try:
                 additionalAddressCity = additionalAddress.find(attrs={"itemprop": "addressLocality"});
@@ -176,8 +176,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
                 sheet[f"I{count}"] = additionalAddressCity.text.strip()
             except:
-                print("Something else went wrong url additionalAddressCity " + therapistProfileLink)
-
+                #print("Something else went wrong url additionalAddressCity " + therapistProfileLink)
+                pass
             try:
                 additionalAddressState = additionalAddress.find(attrs={"itemprop": "addressRegion"});
 
@@ -185,8 +185,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
                 sheet[f"J{count}"] = additionalAddressState.text.strip()
             except:
-                print("Something else went wrong url additionalAddressState " + therapistProfileLink)
-
+                #print("Something else went wrong url additionalAddressState " + therapistProfileLink)
+                pass
             try:
                 additionalAddressZip = additionalAddress.find(attrs={"itemprop": "postalcode"});
 
@@ -194,8 +194,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
                 sheet[f"K{count}"] = additionalAddressZip.text.strip()
             except:
-                print("Something else went wrong url additionalAddressZip " + therapistProfileLink)
-
+                #print("Something else went wrong url additionalAddressZip " + therapistProfileLink)
+                pass
             try:
                 additionalAddressPhone = additionalAddress.find(attrs={"data-event-label": "Address2_PhoneLink"});
 
@@ -203,7 +203,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
                 sheet[f"L{count}"] = additionalAddressPhone.text.strip()
             except:
-                print("Something else went wrong url additionalAddressPhone " + therapistProfileLink)
+                #print("Something else went wrong url additionalAddressPhone " + therapistProfileLink)
+                pass
 
         specialityList = specialtiesColumn.find(attrs={"class":"spec-list attributes-top"})
         #print(f'specialityList: {specialityList.prettify()}')
@@ -221,8 +222,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"M{count}"] = specialitiesStr
         except:
-            print("Something else went wrong url specialitiesStr "+therapistProfileLink)
-
+            #print("Something else went wrong url specialitiesStr "+therapistProfileLink)
+            pass
 
         try:
             # issues
@@ -240,8 +241,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"N{count}"] = issuesStr
         except:
-            print("Something else went wrong url issues "+therapistProfileLink)
-
+            #print("Something else went wrong url issues "+therapistProfileLink)
+            pass
 
 
         try:
@@ -260,8 +261,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"O{count}"] = agesStr
         except:
-            print("Something else went wrong url agesStr "+therapistProfileLink)
-
+            #print("Something else went wrong url agesStr "+therapistProfileLink)
+            pass
 
 
         try:
@@ -279,8 +280,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"P{count}"] = communitiesStr
         except:
-            print("Something else went wrong url communitiesStr "+therapistProfileLink)
-
+            #print("Something else went wrong url communitiesStr "+therapistProfileLink)
+            pass
 
 
         try:
@@ -299,8 +300,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"Q{count}"] = therapyTypesStr
         except:
-            print("Something else went wrong url therapyTypesStr " + therapistProfileLink)
-
+            #print("Something else went wrong url therapyTypesStr " + therapistProfileLink)
+            pass
 
         try:
             # Modality
@@ -317,11 +318,11 @@ def readProfileData(sheet, therapistProfileLinks, count):
 
             sheet[f"R{count}"] = modalitiesStr
         except:
-            print("Something else went wrong url therapyTypesStr " + therapistProfileLink)
+            #print("Something else went wrong url therapyTypesStr " + therapistProfileLink)
+            pass
 
         sheet[f"T{count}"] = therapistProfileLink
         count+=1
-    print(f"count: {count}")
     return count
 
 def readZip(sheet, zipcode, count):
@@ -362,6 +363,7 @@ def readZip(sheet, zipcode, count):
         count = readProfileData(sheet, therapistProfileLinks, count)
         print(f"2count: {count}")
 
+    return count
 
 zipcodes = zipcode.getDCZipcodes();
 
@@ -371,7 +373,9 @@ workbook = Workbook()
 sheet = workbook.active
 
 for zipcode in zipcodes:
-    readZip(sheet, zipcode, count)
+    print("loading "+zipcode+"...")
+    count = readZip(sheet, zipcode, count)
+    print("done loading " + zipcode+"!")
 
 workbook.save(filename="dc_providers.xlsx")
 print("data loading done!")
