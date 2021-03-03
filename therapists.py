@@ -28,6 +28,7 @@ def getTherapistProfileLinks(zipcode):
     nextPageLink = ""
     try:
         nextPage = soup.find('a', href=True, class_="btn btn-default btn-next");
+        #print(soup.prettify())
         nextPageLink = nextPage['href']
     except:
         print("something wrong with next link")
