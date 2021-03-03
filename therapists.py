@@ -4,7 +4,7 @@ import requests
 def getTherapistProfileLinks(zipcode):
 
     header = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
     }
 
     page = requests.get('https://www.psychologytoday.com/us/therapists/'+zipcode, headers=header)
@@ -42,7 +42,7 @@ def getTherapistProfileLinks(zipcode):
 def getNextTherapistProfileLinks(link):
 
     header = {
-        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36',
     }
 
     page = requests.get(link, headers=header)

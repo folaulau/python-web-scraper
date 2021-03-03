@@ -35,9 +35,9 @@ def readProfileData(sheet, therapistProfileLinks, count):
         # providerThread = threading.Thread(target=scrapeProvider, args=(sheet, therapistProfileLink, count))
         # providerThread.start()
         # threads.append(providerThread)
-
-        count = scrapeProvider(sheet, therapistProfileLink, count)
         count += 1
+        count = scrapeProvider(sheet, therapistProfileLink, count)
+
     # for t in threads:
     #     t.join()
 
@@ -387,7 +387,7 @@ def readZip(sheet, zipcode, count):
 
 zipcodes = zipcode.getDCZipcodes();
 
-count = 2;
+count = 1;
 
 workbook = Workbook()
 sheet = workbook.active
