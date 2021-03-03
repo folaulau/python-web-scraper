@@ -288,8 +288,6 @@ zipcodes = zipcode.getDCZipcodes();
 
 count = 2;
 
-
-
 for zipcode in zipcodes:
     workbook = Workbook()
     sheet = workbook.active
