@@ -6,7 +6,6 @@ import zipcode
 
 
 
-
 # therapistProfileLink = "https://www.psychologytoday.com/us/therapists/20001/428441?sid=603dcd0e85fdf&ref=1&rec_next=1&p=1"
 
 
@@ -160,6 +159,51 @@ def readProfileData(sheet, therapistProfileLinks, count):
         except:
             print("Something else went wrong url postalcode "+therapistProfileLink)
 
+        additionalAddress = None
+
+        try:
+            additionalAddress = specialtiesColumn.find(attrs={"class": "address address-rank-2"});
+
+            # print(f'additionalAddress: {additionalAddress.prettify()}')
+        except:
+            print("Something else went wrong url additionalAddress " + therapistProfileLink)
+
+        if additionalAddress!=None:
+            try:
+                additionalAddressCity = additionalAddress.find(attrs={"itemprop": "addressLocality"});
+
+                # print(f'additionalAddressCity: {additionalAddressCity.text.strip()}')
+
+                sheet[f"I{count}"] = additionalAddressCity.text.strip()
+            except:
+                print("Something else went wrong url additionalAddressCity " + therapistProfileLink)
+
+            try:
+                additionalAddressState = additionalAddress.find(attrs={"itemprop": "addressRegion"});
+
+                # print(f'additionalAddressState: {additionalAddressState.text.strip()}')
+
+                sheet[f"J{count}"] = additionalAddressState.text.strip()
+            except:
+                print("Something else went wrong url additionalAddressState " + therapistProfileLink)
+
+            try:
+                additionalAddressZip = additionalAddress.find(attrs={"itemprop": "postalcode"});
+
+                # print(f'additionalAddressZip: {additionalAddressZip.text.strip()}')
+
+                sheet[f"K{count}"] = additionalAddressZip.text.strip()
+            except:
+                print("Something else went wrong url additionalAddressZip " + therapistProfileLink)
+
+            try:
+                additionalAddressPhone = additionalAddress.find(attrs={"data-event-label": "Address2_PhoneLink"});
+
+                # print(f'additionalAddressPhone: {additionalAddressPhone.text.strip()}')
+
+                sheet[f"L{count}"] = additionalAddressPhone.text.strip()
+            except:
+                print("Something else went wrong url additionalAddressPhone " + therapistProfileLink)
 
         specialityList = specialtiesColumn.find(attrs={"class":"spec-list attributes-top"})
         #print(f'specialityList: {specialityList.prettify()}')
@@ -178,8 +222,6 @@ def readProfileData(sheet, therapistProfileLinks, count):
             sheet[f"M{count}"] = specialitiesStr
         except:
             print("Something else went wrong url specialitiesStr "+therapistProfileLink)
-
-
 
 
         try:
@@ -260,8 +302,6 @@ def readProfileData(sheet, therapistProfileLinks, count):
             print("Something else went wrong url therapyTypesStr " + therapistProfileLink)
 
 
-
-
         try:
             # Modality
             modalityList = specialtiesColumn.find(attrs={"class": "spec-list attributes-modality"})
@@ -284,13 +324,8 @@ def readProfileData(sheet, therapistProfileLinks, count):
     print(f"count: {count}")
     return count
 
-zipcodes = zipcode.getDCZipcodes();
+def readZip(sheet, zipcode, count):
 
-count = 2;
-
-for zipcode in zipcodes:
-    workbook = Workbook()
-    sheet = workbook.active
     # columns
     sheet["A1"] = "Full Name"
     sheet["B1"] = "Certifications"
@@ -327,10 +362,18 @@ for zipcode in zipcodes:
         count = readProfileData(sheet, therapistProfileLinks, count)
         print(f"2count: {count}")
 
-    workbook.save(filename=zipcode + "_providers.xlsx")
-    print(zipcode+" done!")
-    count = 2
 
+zipcodes = zipcode.getDCZipcodes();
+
+count = 2;
+
+workbook = Workbook()
+sheet = workbook.active
+
+for zipcode in zipcodes:
+    readZip(sheet, zipcode, count)
+
+workbook.save(filename="dc_providers.xlsx")
 print("data loading done!")
 
 
