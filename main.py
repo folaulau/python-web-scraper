@@ -25,6 +25,7 @@ def readProfileData(sheet, therapistProfileLinks, count):
             providerId = paths[len(paths) - 1];
             print(providerId)
             if providerId in providerIds:
+                print("duplicate provider id="+providerId)
                 continue
             providerIds.add(providerId)
 
@@ -385,7 +386,7 @@ def readZip(sheet, zipcode, count):
 
     return count
 
-zipcodes = zipcode.getDCZipcodes();
+zipcodes = zipcode.getUtahZipcodes();
 
 count = 1;
 
@@ -397,11 +398,11 @@ if __name__ == '__main__':
         print("loading "+zipcode+"...")
         count = readZip(sheet, zipcode, count)
         print("done loading " + zipcode+"!")
-        workbook.save(filename=zipcode+"dc_providers.xlsx")
-        break;
-    # workbook.save(filename="dc_providers.xlsx")
+        # workbook.save(filename=zipcode+"dc_providers.xlsx")
+        # break;
+    workbook.save(filename="utah_therapists.xlsx")
     print("data loading done!")
-    print(providerIds)
+    # print(providerIds)
     # therapistProfileLink = "https://www.psychologytoday.com/us/therapists/20001/428441?sid=603dcd0e85fdf&ref=1&rec_next=1&p=1"
     #
     # parsedUrl =  urlparse(therapistProfileLink);
